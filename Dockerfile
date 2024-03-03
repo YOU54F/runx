@@ -1,7 +1,6 @@
 FROM golang:latest
-MAINTAINER Chris Schmich <schmch@gmail.com>
-RUN go get github.com/mitchellh/go-homedir \
- && go get github.com/jteeuwen/go-bindata/...
+LABEL maintainer="Chris Schmich <schmch@gmail.com>"
+RUN go install -a -v github.com/go-bindata/go-bindata/...@latest
 COPY . /src
 WORKDIR /src
 CMD ["/bin/bash", "-c", "/src/build-linux.sh"]

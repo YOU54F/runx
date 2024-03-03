@@ -1,0 +1,75 @@
+name: Build
+
+on:
+  push:
+
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        args: [ "-v 3.3.0", "-v 3.2.2", "-v 3.1.4", "-l traveling-ruby-20150210-2.1.5-linux-x86_64.tar.gz" ]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up GoLang
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.21
+
+      - name: Setup go-bindata
+        run: go install -a -v github.com/go-bindata/go-bindata/...@latest
+
+      - name: Build
+        run: ./build-linux.sh ${{ matrix.args }}
+
+      - name: Test
+        run: ./runx -v
+
+  build-macos-x86_64:
+    strategy:
+      matrix:
+        args: [ "-v 3.3.0", "-v 3.2.2", "-v 3.1.4", "-l traveling-ruby-20150210-2.1.5-osx.tar.gz" ]
+    runs-on: macos-12
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up GoLang
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.21
+
+      - name: Setup go-bindata
+        run: go install -a -v github.com/go-bindata/go-bindata/...@latest
+
+      - name: Build
+        run: ./build-macos.sh ${{ matrix.args }}
+
+      - name: Test
+        run: ./runx -v
+
+  build-macos-arm64:
+    strategy:
+      matrix:
+        args: [ "-v 3.3.0", "-v 3.2.2", "-v 3.1.4", "-l traveling-ruby-20150210-2.1.5-osx.tar.gz" ]
+    runs-on: macos-14
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up GoLang
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.21
+
+      - name: Setup go-bindata
+        run: go install -a -v github.com/go-bindata/go-bindata/...@latest
+
+      - name: Build
+        run: ./build-macos.sh -a arm64 ${{ matrix.args }}
+
+      - name: Test
+        run: ./runx -v
