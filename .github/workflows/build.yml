@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        args: [ "-v 3.3.0", "-v 3.2.2", "-v 3.1.4", "-l traveling-ruby-20150210-2.1.5-linux-x86_64.tar.gz" ]
+        args: [ "-v 3.3.0", "-v 3.2.3", "-v 3.1.4", "-l traveling-ruby-20150210-2.1.5-linux-x86_64.tar.gz" ]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -31,7 +31,7 @@ jobs:
   build-macos-x86_64:
     strategy:
       matrix:
-        args: [ "-v 3.3.0", "-v 3.2.2", "-v 3.1.4", "-l traveling-ruby-20150210-2.1.5-osx.tar.gz" ]
+        args: [ "-v 3.3.0", "-v 3.2.3", "-v 3.1.4", "-l traveling-ruby-20150210-2.1.5-osx.tar.gz" ]
     runs-on: macos-12
     steps:
       - name: Checkout code
@@ -54,7 +54,7 @@ jobs:
   build-macos-arm64:
     strategy:
       matrix:
-        args: [ "-v 3.3.0", "-v 3.2.2", "-v 3.1.4", "-l traveling-ruby-20150210-2.1.5-osx.tar.gz" ]
+        args: [ "-v 3.3.0", "-v 3.2.3", "-v 3.1.4", "-l traveling-ruby-20150210-2.1.5-osx.tar.gz" ]
     runs-on: macos-14
     steps:
       - name: Checkout code
